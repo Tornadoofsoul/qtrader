@@ -1,89 +1,110 @@
 # Roadmap
 
+## Library
+
+- [x] **project**: folder structure refinements
+- [x] **`contrib`**: temporary/untested code
+    * [x] `rl`: reinforcement-learning agents
+- [x] **`setup.py`**: PyPI-friendly
+    * [x] `requirements.txt`: development only
+    * [x] tests
+
 ## Environment
 
-### Framework
+### API
 
-- [x] **observation**: prices vector
-- [ ] **reward**: modular
-    * [ ] n-step learning
-    * [ ] sharpe/shortino ratio
+- [x] **observation**: `dict` <- `numpy.ndarray`
+    * [x] prices vector
+    * [x] returns vector
+    * [x] last weights
+- [ ] **reward**: modular architecture
+    * [x] n-step learning: varying `trading_period`
     * [ ] risk-aversion (parameterized by alpha)
+    * [ ] sharpe/shortino ratio
     * [ ] averaged return \bar{G}_{t} (instead of discounted return)
-- [ ] **project**: folder structure refinements
+- [x] **multi-agent**: trading accounts
+    * [x] rewards `pandas.DataFrame`
+    * [x] actions `pandas.DataFrame`
+- [x] **runner**: automated execution
+    * [x] fixed agent API
+    * [x] multiple episodes
 
-### Misc
+### GUI
 
-- [ ] **`render`**: GUI
-    * [ ] PnL
-    * [ ] Trading Signals
-    * [ ] Transactions-to-Profit
-    * [ ] Drawdown
-    * [ ] Sector Risk & Exposures
-    * [ ] Asset Risk & Exposures
-- [ ] **multi-agent**: trading accounts
+- [ ] **summary**: live calculations
+    * [x] PnL
+    * [ ] drawdown
+    * [ ] asset risk
+    * [ ] sector risk
+- [x] **trading-signal**: strategies
+    * [x] scatter: varying-intensity
 
-## Agents
+## Agent
 
-### Pre-Training
+### API
 
-- [x] **`tangency-portfolio`**: with transaction costs & random initial portfolio
+- [x] **base**: common interface
+    * [x] `fit` method
+    * [x] private API (agent-specific)
+    * [x] public API (environment runner friendly)
+
+### evaluation-metrics
+
+- [ ] **synthetic market**: dummy (noisy) data
+    * [ ] sine waves
+    * [ ] sawtooth waves
+    * [ ] chirp waves
+- [ ] **S&P500**: 5 years data
+    * [ ] handful universe
+    * [ ] whole market
+
+### baseline models
+
+- [x] **random**: random selection of allocations
+- [x] **uniform**: 1/N allocation
+
+### pre-training
+
+- [x] **quadratic-programming**: general optimizer
+    * [x] general objective function
+    * [x] supervised data generator
+    * [x] trading agent
 - [ ] **Q**: meaningful interpretation of action-value function
 
-### Trading Signals
+### model-base
 
-- [ ] **covariance**: volatility predictor
+- [x] **persistence**: one-step look back
+- [x] **VAR**: vector autoregressive environment model
+- [x] **RNN**: recurrent neural network environment model
 
-## Market Simulation
+### model-free
 
-- [x] **`surrogates`**: baseline model
-- [x] **`copulas`**: baseline model
-- [x] **`VAR`**: baseline model
-- [ ] **`VAE`**: recurrent variational autoencoder architecure
+- [ ] **DQN**: binary trader
+- [ ] **DDPG**: portfolio allocator
 
----
+## Market-Simulation
 
-## Schedule
+### evaluation-metrics
 
-### [26.03.18 - 01.04.18 | Week 1](../log/week_1.ipynb)
+- [ ] **moments**: statistical moments on raw & rolling data
+- [ ] **arbitrage**: statistical arbitrage of generated market
+    * [ ] quadratic programming
+    * [ ] random agent
+    * [ ] reinforcement agent
+- [ ] **sector**: classification & statistics
 
-- [x] **Pre-Training**: `tangency-portfolio` data generator
-- [x] **Market Simulation**: baseline models
-- [x] **Environment**: observation & OpenAI new API
+### baseline-models
 
-### [02.04.18 - 08.04.18 | Week 2](../log/week_2.ipynb)
+- [ ] **AAFT**: amplitude adjusted fourier transform baseline model
+- [ ] **VAR**: vector autoregressive baseline model
 
-- [x] **Trading Periods**: fix trading periods
-- [ ] **Pre-Training**: `tangency-portfolio` with fixed \alpha & sharpe ratio implementations
-- [x] **Project**: folder structure refinements
+### generative-models
 
-### [09.04.18 - 15.04.18 | Week 3](../log/week_3.ipynb)
-
-- [ ] **Q**: meaningful interpretation of action-value function
-- [ ] **`render`**: GUI
-
-### [16.04.18 - 22.04.18 | Week 4](../log/week_4.ipynb)
-
-- [ ] **Multi-agent**: trading accounts
-- [ ] **`VAE`**: recurrent variational autoencoder architecure
-- [ ] **Reward**: modular
-
-### [23.04.18 - 29.04.18 | Week 5](../log/week_5.ipynb)
-
-- [ ] **Covariance**: volatility predictor
-
-### [30.04.18 - 06.05.18 | Week 6](../log/week_6.ipynb)
-
-### [07.05.18 - 13.05.18 | Week 7](../log/week_7.ipynb)
-
-### [14.05.18 - 20.05.18 | Week 8](../log/week_8.ipynb)
-
-### [21.05.18 - 27.05.18 | Week 9](../log/week_9.ipynb)
-
-### [28.05.18 - 03.06.18 | Week 10](../log/week_10.ipynb)
-
-### [04.06.18 - 10.06.18 | Week 11](../log/week_11.ipynb)
-
-### [11.06.18 - 17.06.18 | Week 12](../log/week_12.ipynb)
-
-### [18.06.18 - 24.06.18 | Week 13](../log/week_13.ipynb)
+- [ ] **VAE**: vanilla variational autoencoder architecure
+    * [ ] fixed size sequence generation
+    * [ ] recurrent architecture
+    * [ ] comparison to baselines
+- [ ] **GAN**: vanilla generative adversarial network
+    * [ ] fixed size sequence generation
+    * [ ] recurrent architecture
+    * [ ] comparison to baselines

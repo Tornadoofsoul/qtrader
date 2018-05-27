@@ -4,11 +4,13 @@ import numpy as np
 import scipy.optimize
 
 import qtrader.agents.pretrainer
-from qtrader.agents.base import BaseAgent
+from qtrader.agents.base import Agent
 
 
-class QuadraticAgent(BaseAgent):
+class QuadraticAgent(Agent):
     """Quadratic Programming agent."""
+
+    _id = 'quadratic'
 
     def __init__(self, action_space, J, window=10, *args):
         self.optimizer = qtrader.agents.pretrainer.optimizer(self._J(J), *args)
@@ -16,10 +18,10 @@ class QuadraticAgent(BaseAgent):
         self.memory = deque(maxlen=window)
         self.w = self.action_space.sample()
 
-    def observe(self, observation):
+    def observe(self, observation, action, reward, done, next_observation):
         self.memory.append(observation.values)
 
-    def act(self, observation, reward, done):
+    def act(self, observation):
         # deque -> np.array, for easy math
         memory = np.array(self.memory)
         # number of assets
