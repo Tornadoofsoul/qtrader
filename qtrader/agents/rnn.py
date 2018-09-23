@@ -5,7 +5,8 @@ import tensorflow as tf
 
 from qtrader.agents.base import Agent
 from qtrader.utils.numpy import softmax
-from qtrader.utils import rolling2d
+from qtrader.utils.preprocessor import rolling2d
+from qtrader.utils.pandas import clean
 
 
 class RNNAgent(Agent):
